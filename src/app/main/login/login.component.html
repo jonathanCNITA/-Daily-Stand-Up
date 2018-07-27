@@ -1,12 +1,14 @@
 <p>
   login works!
 </p>
-<form [formGroup]="regiForm" (ngSubmit)="onFormSubmit(regiForm.value)" class="example-form">
+<form [formGroup]="logForm" (ngSubmit)="onFormSubmit(logForm.value)" class="example-form">
   <mat-form-field class="full-width">
     <input formControlName="email" matInput placeholder="mail">
+    <mat-error class="error-message" *ngIf="(logForm.get('email').dirty || logForm.get('email').touched)">"Please enter a valid email"</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width">
     <input formControlName="password" matInput placeholder="password">
+    <mat-error class="error-message" *ngIf="(logForm.get('password').dirty || logForm.get('password').touched)">"Please enter a valid password (6)"</mat-error>
   </mat-form-field>
-  <button mat-button  [disabled]="!regiForm.valid">Submit</button>
+  <button mat-button  [disabled]="!logForm.valid">Submit</button>
 </form>

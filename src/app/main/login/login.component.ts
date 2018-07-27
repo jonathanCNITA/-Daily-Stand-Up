@@ -7,11 +7,13 @@ import { FormBuilder, FormGroup, Validators , FormsModule, NgForm } from '@angul
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  regiForm: FormGroup;
+  logForm: FormGroup;
   email = '';
   password = '';
+
+
   constructor( private fb: FormBuilder ) {
-    this.regiForm = fb.group({
+    this.logForm = fb.group({
       'email': [null, Validators.compose([Validators.required, Validators.email])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
     });
