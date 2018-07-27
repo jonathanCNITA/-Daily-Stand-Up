@@ -27,11 +27,9 @@ export class LoginComponent implements OnInit {
    }
 
   onSubmit(form: Login): void {
-    console.log(form);
-    // tslint:disable-next-line:max-line-length
+
     this.apiservice.login$(form.email, form.password).subscribe(res => {
       localStorage.setItem('toktok', res['token']);
-      console.log(res);
       this.apiservice.logged = true;
     });
   }

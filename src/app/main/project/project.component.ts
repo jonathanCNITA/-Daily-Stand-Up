@@ -19,9 +19,6 @@ export class ProjectComponent implements OnInit {
   }
 
   deleteProject() {
-    this.apiservice.deleteProject(this.project.id).subscribe(res => {
-      console.log(res);
-      this.projectDeleted.emit(this.project.id);
-    });
+    this.apiservice.deleteProject(this.project.id).subscribe(() => this.projectDeleted.emit(this.project.id));
   }
 }
