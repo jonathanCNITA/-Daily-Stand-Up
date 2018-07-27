@@ -1,0 +1,8 @@
+<div class="customCard">
+  <mat-card>
+    <h1>{{ project.name }}</h1>
+    <img [src]="project.creator.picture" alt="">
+    <h6>{{ project.id }}</h6>
+    <button mat-button (click)="deleteProject()">Delete</button>
+  </mat-card>
+</div>
