@@ -1,0 +1,6 @@
+<p>
+  list-projects works!
+</p>
+<div *ngIf="apiservice.logged">
+  <app-project *ngFor="let dt of allProjects" [project]="dt" (projectDeleted)="reGetDatas($event)"></app-project>
+</div>
