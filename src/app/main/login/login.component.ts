@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators , FormsModule, NgForm } from '@angular/forms';
-
+import { ApiService } from '../../shared/api.service';
+import { Login } from '../../shared/login.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,19 +11,29 @@ export class LoginComponent implements OnInit {
   logForm: FormGroup;
   email = '';
   password = '';
+  myDatas: any;
+  tokenToStore =  { 'userToken': ''};
 
-
-  constructor( private fb: FormBuilder ) {
+  constructor( private fb: FormBuilder, private apiservice: ApiService ) {
     this.logForm = fb.group({
       'email': [null, Validators.compose([Validators.required, Validators.email])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])],
     });
    }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.apiservice.isLogged();
+    this.apiservice.getDatas$().subscribe(data => this.myDatas =  data);
+   }
 
-  onSubmit(form: NgForm): void {
-    console.log(form.value);
+  onSubmit(form: Login): void {
+    console.log(form);
+    // tslint:disable-next-line:max-line-length
+    this.apiservice.login$(form.email, form.password).subscribe(res => {
+      localStorage.setItem('toktok', res['token']);
+      console.log(res);
+      this.apiservice.logged = true;
+    });
   }
 
   hello(): void {
